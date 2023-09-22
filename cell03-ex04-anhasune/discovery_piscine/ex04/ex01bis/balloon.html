@@ -1,0 +1,63 @@
+<style>
+    #balloonDiv{
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        border-radius: 50%;
+    }
+</style>
+
+<div id="balloonDiv"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    let rotateColor = 0;
+    let divElement = $("#balloonDiv");
+
+    const minimumSize = 200;
+    const maximumSize = 420;
+    const colorArray = ["red", "green", "blue"];
+
+    function updateElement(element, width, height, color) {
+        element.css({
+            width: width,
+            height: height,
+            backgroundColor: color
+        });
+    };
+
+    function enlargeBalloonSize() {
+        rotateColor += 1;
+        if (rotateColor > 2) {
+            rotateColor = 0;
+        }
+
+        const nextWidth = divElement.width() + 10, nextHeight = divElement.height() + 10;
+
+        updateElement(
+            divElement, 
+            (nextWidth + 10 > maximumSize || nextHeight + 10 > maximumSize) && 200 || nextWidth + 10,
+            (nextWidth + 10 > maximumSize || nextHeight + 10 > maximumSize) && 200 || nextHeight + 10,
+            colorArray[rotateColor]
+        )
+    };
+
+    function cursorLeaveBalloon() {
+        const nextWidth = divElement.width() - 5, nextHeight = divElement.height() - 5;
+
+        rotateColor -= 1
+        if (rotateColor < 0) {
+            rotateColor = 2;
+        }
+
+        updateElement(
+            divElement,
+            Math.max(minimumSize, nextWidth), 
+            Math.max(minimumSize, nextHeight), 
+            colorArray[rotateColor]
+        )
+    };
+
+    divElement.on("click", enlargeBalloonSize);
+    divElement.on("mouseleave", cursorLeaveBalloon);
+</script>

@@ -1,0 +1,21 @@
+#dropdown-val{
+    display: flex;
+
+    padding: 5px;
+
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #cecece;
+    color: #252525;
+}
+
+#dropdown-val:hover{
+    background-color: #b5b5b5;
+}
+
+#dropdown-val option {
+    font-size: 16px;
+    color: #333;
+    background-color: #cecece;
+}

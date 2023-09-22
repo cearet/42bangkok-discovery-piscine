@@ -1,0 +1,51 @@
+<div class='calculator' style="display: flex; justify-content: center; text-align: center; margin: auto; gap: 5px;">
+    <label for="left-member">First number:</label>
+    <input type="number" id="left-member" name="left-member">
+
+    <label for="operator">Operator</label>
+    <select id="operator" name="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+    </select>
+
+    <label for="right-member">Second number:</label>
+    <input type="number" id="right-member" name="right-member">
+</div>
+
+<input style="display: flex; justify-content: center; text-align: center; margin: auto; margin-top: 5px;" type="submit" value="Try me!" id="button-press">
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    const button = $("#button-press");
+    function getCalculatorNumber()
+    {
+        let leftMember = parseInt($("#left-member").val());
+        let rightMember = parseInt($("#right-member").val());
+        let operatorMember = $("#operator").val();
+
+        let evalResult = eval(leftMember + operatorMember + rightMember)
+
+        if (leftMember < 0 || rightMember < 0 || isNaN(leftMember) || isNaN(rightMember)) {
+            alert("Error :(");
+            return
+        }
+        else if ((operatorMember == "%" || operatorMember == "/") && rightMember == 0) {
+            alert("It's over 9000!");
+            console.log(evalResult);
+            return
+        }
+
+        alert(evalResult);
+        console.log(evalResult);
+    };
+
+    function awake() {
+        alert("Please, use me...");
+    }
+    setInterval(awake, 30000);
+
+    button.on("click", getCalculatorNumber);
+</script>
